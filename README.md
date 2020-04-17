@@ -1,5 +1,7 @@
 ## NodeJS + Passport Login
 
+![alt](./gif/nodejs_passport.gif)
+
 ### Setting for Development
 
 - `npm init`
