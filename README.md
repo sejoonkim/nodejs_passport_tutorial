@@ -162,3 +162,42 @@
       ```
 
   - getUserByEmail is passed as a function from the caller of initialize
+
+- app.js - POST - login
+
+  - app - use - session
+
+    - options
+      - secret: a key that is secret, which encrypts all information
+      - resave: false (if nothing has changed, do not save session variables)
+      - saveUninitialized: false (do you want to save an empty value in the session if there is no value?)
+
+  - ```javascript
+    require("dotenv").config();
+    ```
+
+    - require all the environment variables
+
+  - ```javascript
+    app.use(passport.initialize());
+    ```
+
+    - initialize basics in passport
+
+  - ```javascript
+    app.use(passport.session());
+    ```
+
+    - store variables across the entire session the user persists
+
+  - do not need (req, res) =>, just need passport middleware
+
+- login.ejs
+
+  - display flash messages
+
+  - ```ejs
+    <% if (messages.error) { %> <%= messages.error %> <% } %>
+    ```
+
+    - messages will display errors
