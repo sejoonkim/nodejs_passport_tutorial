@@ -119,3 +119,46 @@
   2. try~catch
 
 - redirect the user to a URL when finished
+
+<br/>
+
+### Passport + POST - Login
+
+- passport has many ways of logging in
+
+  - `npm i passport passport-local`
+
+- store and persist user across different pages => session
+
+  - `npm i express-session`
+
+- display messages if failed login
+
+  - `npm i express-flash`
+  - used by passport inside internals
+
+- create `passport-config.js`
+
+  - password defaults to "password"
+
+  - callback function to authenticate the user
+
+    - ```javascript
+      passport.serializeUser((user, done) => {});
+      ```
+
+      - store inside the session
+
+    - ```javascript
+      passport.deserializeUser((id, done) => {});
+      ```
+
+      - since user has been serialized to a single ID, takes in id as variable
+
+  - authenticating user function
+
+    - ```javascript
+      const authenticateUser = (email, password, done) => {};
+      ```
+
+  - getUserByEmail is passed as a function from the caller of initialize
