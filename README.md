@@ -77,3 +77,45 @@
   - `<button>` for submitting
 
   - `<a>` for directing to /login
+
+- login.ejs
+  - similar to register.ejs
+
+<br/>
+
+### Implement POST Methods - Register
+
+- since getting information from **forms**
+
+  - ```javascript
+    app.use(express.urlencoded({ extended: false }));
+    ```
+
+    - able to access `email` and `password` inside `req` variable
+    - `req.body.name`
+    - `req.body.email`
+    - `req.body.password`
+    - corresponds to the **name field** in html
+
+- ```javascript
+  const users = [];
+  ```
+
+  - save user information in a local variable
+
+- hash passwords
+
+  - `npm i bcrypt`
+
+  - ```javascript
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    ```
+
+  - 10 : how many times to generate the hash = how secure we want the password to be
+
+- since post accesses DB or local variable = async operation
+
+  1. make the function async
+  2. try~catch
+
+- redirect the user to a URL when finished
