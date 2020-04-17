@@ -1,0 +1,30 @@
+{
+  "name": "nodejs_passport_login_system_tutorial",
+  "version": "1.0.0",
+  "description": "Tutorial for Passport Login System w/ NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sejoonkim/nodejs_passport_tutorial.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "se joon kim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sejoonkim/nodejs_passport_tutorial/issues"
+  },
+  "homepage": "https://github.com/sejoonkim/nodejs_passport_tutorial#readme",
+  "dependencies": {
+    "ejs": "^3.0.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.3"
+  }
+}
