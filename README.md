@@ -218,3 +218,34 @@
 - when user logged in, block the user from accessing "/login"
 
   - if user is authenticated, then redirect to home
+
+<br/>
+
+### Create Logout
+
+- ```javascript
+  app.delete("/logout", (req, res) => {
+    req.logOut();
+    res.redirect("/login");
+  });
+  ```
+
+  - logOut() is provided by passport
+  - delete()
+    - cannot call directly from HTML
+      - maybe...use `<form>` + POST?
+      - **delete** is not supported by `<form>`
+      - So...
+
+- `npm i method-override`
+
+  - override the HTML method
+  - ex) instead of using POST -> override to DELETE
+
+- index.ejs
+
+  - ```html
+    <form action="/logout?_method=DELETE"></form>
+    ```
+
+    - \_method = key set to override the method

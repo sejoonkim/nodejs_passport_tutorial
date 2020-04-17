@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const session = require("express-session");
 const flash = require("express-flash");
+const methodOverride = require("method-override");
 const app = express();
 
 const initializePassport = require("./passport-config");
@@ -18,6 +19,7 @@ initializePassport(
 
 const users = [];
 
+//----- Middlewares -----
 app.set("view-engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(
@@ -30,7 +32,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use(methodOverride("_method"));
 
+//----- Routes -----
 app.get("/", checkAuthenticated, (req, res) => {
   res.render("index.ejs", { name: req.user.name });
 });
@@ -69,6 +73,10 @@ app.post("/register", checkNotAuthenticated, async (req, res) => {
   console.log(users);
 });
 
+app.delete("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/login");
+});
 // middleware function
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
