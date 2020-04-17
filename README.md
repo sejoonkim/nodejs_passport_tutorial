@@ -47,3 +47,33 @@
     ```
 
 <br/>
+
+### Login and Register
+
+- create views
+
+- create routes in server.js
+
+- register.ejs
+
+  - create `<form>` that contains inputs
+
+  - `method="POST"` to `action="/register"`
+
+    - create route for post in server.js
+
+  - ```html
+    <label for="name">Name</label>
+    ```
+
+    - this label is for **name** variable
+
+  - ```html
+    <input type="text" id="name" name="name" />
+    ```
+
+    - name="name" : how acts in server
+
+  - `<button>` for submitting
+
+  - `<a>` for directing to /login
