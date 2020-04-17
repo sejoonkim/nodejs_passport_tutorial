@@ -163,9 +163,9 @@
 
   - getUserByEmail is passed as a function from the caller of initialize
 
-- app.js - POST - login
+- server.js - POST - login
 
-  - app - use - session
+  - server - use - session
 
     - options
       - secret: a key that is secret, which encrypts all information
@@ -201,3 +201,20 @@
     ```
 
     - messages will display errors
+
+<br/>
+
+### Protect Routes When Not Logged In
+
+- create new function in server.js
+
+  - ```javascript
+    if (req.isAuthenticated())
+    ```
+
+    - passport enables calling the method on req
+    - returns true or false
+
+- when user logged in, block the user from accessing "/login"
+
+  - if user is authenticated, then redirect to home

@@ -10,8 +10,10 @@ const flash = require("express-flash");
 const app = express();
 
 const initializePassport = require("./passport-config");
-initializePassport(passport, (email) =>
-  users.find((user) => user.email === email)
+initializePassport(
+  passport,
+  (email) => users.find((user) => user.email === email),
+  (id) => users.find((user) => user.id === id)
 );
 
 const users = [];
@@ -29,16 +31,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.get("/", (req, res) => {
-  res.render("index.ejs", { name: "brian" });
+app.get("/", checkAuthenticated, (req, res) => {
+  res.render("index.ejs", { name: req.user.name });
 });
 
-app.get("/login", (req, res) => {
+app.get("/login", checkNotAuthenticated, (req, res) => {
   res.render("login.ejs");
 });
 
 app.post(
   "/login",
+  checkNotAuthenticated,
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
@@ -46,11 +49,11 @@ app.post(
   })
 );
 
-app.get("/register", (req, res) => {
+app.get("/register", checkNotAuthenticated, (req, res) => {
   res.render("register.ejs");
 });
 
-app.post("/register", async (req, res) => {
+app.post("/register", checkNotAuthenticated, async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     users.push({
@@ -65,5 +68,20 @@ app.post("/register", async (req, res) => {
   }
   console.log(users);
 });
+
+// middleware function
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next(); // okay
+  }
+  res.redirect("/login");
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect("/");
+  }
+  next();
+}
 
 app.listen(3000);
